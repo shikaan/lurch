@@ -5,6 +5,7 @@ import {ExpressRouter, ExpressServer, METHODS} from './server'
 
 import {UsersController, UsersRepository} from "~api/users";
 import FirebaseDatabaseClient, {COLLECTION} from "~database/firebase.client";
+import {URLsController} from "~api/urls";
 
 const logger = new Logger(LOG_LEVEL.INFO);
 
@@ -16,6 +17,8 @@ server.attachMiddleware(json());
 const firebaseDatabaseClient = new FirebaseDatabaseClient(COLLECTION.USERS, logger);
 const usersRepository = new UsersRepository(firebaseDatabaseClient, logger);
 const usersController = new UsersController(usersRepository, logger);
+
+const urlsController = new URLsController();
 
 apiRouter
     .attachHandler(
@@ -52,6 +55,32 @@ apiRouter
                 next(e)
             }
         });
+
+apiRouter
+    .attachHandler(
+        '/urls',
+        METHODS.GET,
+        async (req, res, next) => {
+            try {
+                res.json(await urlsController.findAll());
+            } catch (e) {
+                next(e)
+            }
+        }
+    );
+
+apiRouter
+    .attachHandler(
+        '/urls',
+        METHODS.POST,
+        async (req, res, next) => {
+            try {
+                res.json(await urlsController.save(req.body));
+            } catch (e) {
+                next(e)
+            }
+        }
+    );
 
 server.attachRouter(apiRouter);
 
