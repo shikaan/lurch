@@ -1,0 +1,48 @@
+{
+  "name": "lurch",
+  "version": "0.0.1",
+  "description": "Ugly manservant to welcome users",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "nodemon -r @babel/register ./src",
+    "build": "babel ./src -o ./lib",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Manuel Spagnolo <spagnolo.manu@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-jwt": "^5.3.1",
+    "firebase-admin": "^8.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.4",
+    "@babel/preset-env": "^7.5.4",
+    "@babel/register": "^7.4.4",
+    "@types/express": "^4.17.0",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "nodemon": "^1.19.1"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "10"
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      ["module-resolver", {
+        "alias": {
+          "~api": "./src/api",
+          "~server": "./src/server",
+          "~database": "./src/database"
+        }
+      }]
+    ]
+  }
+}
