@@ -6,9 +6,11 @@
 System.config({
     'paths': {
         '~/*': './src/*',
-        '~api/*': './src/api/*',
+        '~api/*': './src/routes/api/*',
         '~database/*': './src/database/*',
+        '~middlewares/*': './src/middlewares/*',
         '~server/*': './src/server/*',
+        '~utils/*': './src/utils/*',
     }
 });
 

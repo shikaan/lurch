@@ -9,7 +9,7 @@ export default class UsersRepository {
      */
     constructor(databaseClient, logger) {
         this.databaseClient = databaseClient;
-        this.logger = logger;
+        this._logger = logger;
         this.collection = COLLECTION.USERS;
     }
 
@@ -19,20 +19,26 @@ export default class UsersRepository {
         return Object.entries(users).map(([id, user]) => User.fromDTO(user, id))
     }
 
-    async find (id) {
-        const user = await this.databaseClient.find(this.collection, id);
+    async findById (id) {
+        const user = await this.databaseClient.findById(this.collection, id);
 
         return User.fromDTO(user, id);
     }
 
+    async findByUsername (username) {
+        const users = await this.databaseClient.findByField(this.collection, 'username', username);
+
+        return Object.entries(users).map(([id, user]) => User.fromDTO(user, id))[0]
+    }
+
     /**
      *
-     * @param {UserDTO} user
+     * @param {UserDTO} userData
      * @return {Promise<User>}
      */
-    async save(user) {
-        const id = await this.databaseClient.save(this.collection, user);
+    async save(userData) {
+        const id = await this.databaseClient.save(this.collection, userData);
 
-        return User.fromDTO(user, id);
+        return User.fromDTO(userData, id);
     }
 }

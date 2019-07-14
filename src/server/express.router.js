@@ -28,4 +28,13 @@ export default class ExpressRouter extends Router {
 
         return this
     }
+
+    /**
+     * @param {RequestHandler} middleware
+     */
+    attachMiddleware(middleware) {
+        this._router.use(middleware)
+
+        return this
+    }
 }

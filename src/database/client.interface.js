@@ -21,7 +21,18 @@ export default class DatabaseClient {
      *
      * @return {object<{string: object}>}
      */
-    find(collection, id) {
+    findById(collection, id) {
+        throw Error('Not implemented!')
+    }
+
+    /**
+     * @param {string} collection
+     * @param {string} key
+     * @param {string} value
+     *
+     * @return {object<{string: object}>}
+     */
+    findByField(collection, key, value) {
         throw Error('Not implemented!')
     }
 

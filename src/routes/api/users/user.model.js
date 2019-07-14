@@ -14,4 +14,8 @@ export default class User {
     static fromDTO(user, id) {
         return new User(id, user.username, user.password);
     }
+
+    static fromCollectionEntry(collectionEntry) {
+
+    }
 }

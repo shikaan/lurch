@@ -2,10 +2,13 @@ import fs from 'fs';
 
 import firebase from 'firebase-admin';
 import DatabaseClient from "./client.interface";
-import User from "~api/users/user.model";
 
 export const COLLECTION = {
     USERS: 'users'
+};
+
+export const INDEXED_KEYS = {
+    [COLLECTION.USERS]: ['username']
 };
 
 const COLLECTIONS = Object.values(COLLECTION);
@@ -24,12 +27,31 @@ export default class FirebaseDatabaseClient extends DatabaseClient {
         this._logger = logger;
     }
 
-    async find(collection, id) {
+    async findById(collection, id) {
         if (!COLLECTIONS.includes(collection)) {
             throw new TypeError(`Collection should be one of ${COLLECTIONS.join()}. Got: ${collection}`)
         }
 
         const ref = this._client.ref(`${collection}/${id}`);
+        const dataSnapshot = await ref.once('value');
+
+        if (!dataSnapshot.exists()) {
+            throw new ReferenceError(`Unable to find any item in collection ${collection}`)
+        }
+
+        return dataSnapshot.toJSON()
+    }
+
+    async findByField(collection, key, value) {
+        if (!COLLECTIONS.includes(collection)) {
+            throw new TypeError(`Collection should be one of ${COLLECTIONS.join()}. Got: ${collection}`)
+        }
+
+        if (!INDEXED_KEYS[collection].includes(key)) {
+            throw new TypeError(`Key should be one of ${INDEXED_KEYS[collection].join()}. Got: ${key}`)
+        }
+
+        const ref = this._client.ref(`${collection}`).orderByChild(key).limitToFirst(1);
         const dataSnapshot = await ref.once('value');
 
         if (!dataSnapshot.exists()) {

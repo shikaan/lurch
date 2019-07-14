@@ -11,9 +11,10 @@
   "author": "Manuel Spagnolo <spagnolo.manu@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
-    "express-jwt": "^5.3.1",
     "firebase-admin": "^8.2.0",
+    "jsonwebtoken": "^8.5.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
   },
@@ -42,7 +43,9 @@
         "module-resolver",
         {
           "alias": {
-            "~api": "./src/api",
+            "~utils": "./src/utils",
+            "~middlewares": "./src/middlewares",
+            "~api": "./src/routes/api",
             "~server": "./src/server",
             "~database": "./src/database"
           }
