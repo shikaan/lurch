@@ -20,7 +20,6 @@ WORKDIR /home/node
 COPY ./package.json /home/node
 COPY ./package-lock.json /home/node
 COPY ./src/ /home/node/src/
-COPY ./firebase_auth.json /home/node/src/firebase_auth.json
 
 RUN npm i
 
