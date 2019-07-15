@@ -4,6 +4,10 @@ services:
     depends_on:
       - wayne
     image: shikaan/lurch:latest
+    build:
+      args:
+        DT_API_URL: ${DT_API_URL}
+        DT_API_TOKEN: ${DT_ONEAGENT_OPTIONS}
     env_file:
       - ./local.env
     ports:
