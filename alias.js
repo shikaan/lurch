@@ -9,6 +9,7 @@ System.config({
         '~api/*': './src/routes/api/*',
         '~database/*': './src/database/*',
         '~middlewares/*': './src/middlewares/*',
+        '~exceptions/*': './src/exceptions/*',
         '~server/*': './src/server/*',
         '~utils/*': './src/utils/*',
     }

@@ -47,7 +47,8 @@
             "~middlewares": "./src/middlewares",
             "~api": "./src/routes/api",
             "~server": "./src/server",
-            "~database": "./src/database"
+            "~database": "./src/database",
+            "~exceptions": "./src/exceptions"
           }
         }
       ]
