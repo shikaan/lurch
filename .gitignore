@@ -4,3 +4,4 @@ node_modules
 .npm
 .config
 lib
+firebase_auth.json
