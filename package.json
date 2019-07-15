@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "start": "nodemon -r @babel/register ./src",
-    "build": "babel ./src -o ./lib",
+    "build": "babel ./src -d ./lib/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Manuel Spagnolo <spagnolo.manu@gmail.com>",
