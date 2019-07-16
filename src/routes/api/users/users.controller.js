@@ -20,7 +20,7 @@ export default class UsersController {
     }
 
     async register(body) {
-        const password = encryptPassword(body.password);
+        const password = await encryptPassword(body.password);
         const userData = new UserDTO(body.username, password);
         const user = await this.repository.save(userData);
         const token = createToken(user, process.env.JWT_SECRET);
