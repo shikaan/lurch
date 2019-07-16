@@ -11,7 +11,7 @@ export default (logger) =>
         (error, req, res, next) => {
             if (error) {
                 logger.error(error);
-                res.status(error.statusCode).send(error.message)
+                res.status(error.statusCode || 500).send(error.message)
             } else {
                 next()
             }
