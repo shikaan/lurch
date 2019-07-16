@@ -1,5 +1,7 @@
-import UserDTO from "./user.dto";
 import {createToken, encryptPassword} from "~utils";
+import {UnauthorizedException} from "~exceptions";
+
+import UserDTO from "./user.dto";
 
 export default class UsersController {
     /**
@@ -35,8 +37,7 @@ export default class UsersController {
         const password = encryptPassword(body.password);
 
         if (password !== user.password) {
-            // TODO: make me pretty
-            throw new Error('Unauthrized');
+            throw new UnauthorizedException();
         }
 
         const token = createToken(user, process.env.JWT_SECRET);

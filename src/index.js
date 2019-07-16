@@ -1,4 +1,5 @@
 import {json} from 'express'
+import cors from 'cors'
 import cookieParser from 'cookie-parser'
 
 import {Logger, LOG_LEVEL} from '~utils'
@@ -10,6 +11,7 @@ const logger = new Logger(LOG_LEVEL.INFO);
 
 const server = new ExpressServer();
 
+server.attachMiddleware(cors({ origin: true, credentials: true }));
 server.attachMiddleware(json());
 server.attachMiddleware(cookieParser());
 
